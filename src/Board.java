@@ -304,7 +304,14 @@ public class Board {
     }
 
     private void revealEmpty(int row, int column) {
-        if (row - 1 >= 0 && row + 1 <= rows -1) System.out.println(2);
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.columns; j++) {
+                if (distance(row, column, i ,j) < 2 && Objects.equals(this.board[i][j].getType(), "EMPTY")) {
+                    this.board[i][j].setHidden(false);
+                    //revealEmpty(i,j);
+                }
+             }
+        }
     }
 
     private double distance(int x1, int y1, int x2, int y2) {
