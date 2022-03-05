@@ -7,7 +7,7 @@ public class Minesweeper {
         board.generateBoard();
         board.printBoard();
         board.setFLAG(1,1);
-        board.playCell(2,2);
+        board.playCell(6,6);
         board.printBoard();
         board.setFLAG(3,3);
         board.printBoard();
