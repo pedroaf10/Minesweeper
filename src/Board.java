@@ -247,6 +247,87 @@ public class Board {
         return bombs;
     }
 
+        public int countBombs2(int row, int column) {
+        int bombs = 0;
+
+        if (row == 0 && column > 0 && column < columns - 1) {
+            if (this.board[0][column - 1].getType().equals("BOMB")) bombs++;
+            if (this.board[0][column + 1].getType().equals("BOMB")) bombs++;
+            if (this.board[1][column + 1].getType().equals("BOMB")) bombs++;
+            if (this.board[1][column - 1].getType().equals("BOMB")) bombs++;
+            if (this.board[1][column].getType().equals("BOMB")) bombs++;
+        }
+
+        if (row == rows - 1 && column > 0 && column < columns - 1) {
+            if (this.board[row][column - 1].getType().equals("BOMB")) bombs++;
+            if (this.board[row][column + 1].getType().equals("BOMB")) bombs++;
+            if (this.board[row - 1][column + 1].getType().equals("BOMB")) bombs++;
+            if (this.board[row - 1][column - 1].getType().equals("BOMB")) bombs++;
+            if (this.board[row - 1][column].getType().equals("BOMB")) bombs++;
+        }
+
+        if (column == 0 && row > 0 && row < rows - 1) {
+            if (this.board[row - 1][0].getType().equals("BOMB")) bombs++;
+            if (this.board[row + 1][0].getType().equals("BOMB")) bombs++;
+            if (this.board[row - 1][1].getType().equals("BOMB")) bombs++;
+            if (this.board[row + 1][1].getType().equals("BOMB")) bombs++;
+            if (this.board[row][1].getType().equals("BOMB")) bombs++;
+        }
+
+        if (column == columns - 1 && row > 0 && row < rows - 1) {
+            if (this.board[row - 1][column].getType().equals("BOMB")) bombs++;
+            if (this.board[row + 1][column].getType().equals("BOMB")) bombs++;
+            if (this.board[row - 1][column - 1].getType().equals("BOMB")) bombs++;
+            if (this.board[row][column - 1].getType().equals("BOMB")) bombs++;
+            if (this.board[row + 1][column - 1].getType().equals("BOMB")) bombs++;
+        }
+
+        if (row > 0 && row < rows - 1) {
+            if (column > 0 && column < columns - 1) {
+                bombs = 0;
+                if (this.board[row - 1][column - 1].getType().equals("BOMB")) bombs++;
+                if (this.board[row - 1][column].getType().equals("BOMB")) bombs++;
+                if (this.board[row - 1][column + 1].getType().equals("BOMB")) bombs++;
+                if (this.board[row][column - 1].getType().equals("BOMB")) bombs++;
+                if (this.board[row][column + 1].getType().equals("BOMB")) bombs++;
+                if (this.board[row + 1][column - 1].getType().equals("BOMB")) bombs++;
+                if (this.board[row + 1][column].getType().equals("BOMB")) bombs++;
+                if (this.board[row + 1][column + 1].getType().equals("BOMB")) bombs++;
+            }
+        }
+
+        if (row == 0 && column == 0) {
+            bombs = 0;
+            if (this.board[0][1].getType().equals("BOMB")) bombs++;
+            if (this.board[1][0].getType().equals("BOMB")) bombs++;
+            if (this.board[1][1].getType().equals("BOMB")) bombs++;
+        }
+
+        if (row == rows - 1 && column == columns - 1) {
+            bombs = 0;
+
+            if (this.board[row][column - 1].getType().equals("BOMB")) bombs++;
+            if (this.board[row - 1][column].getType().equals("BOMB")) bombs++;
+            if (this.board[row - 1][column - 1].getType().equals("BOMB")) bombs++;
+        }
+
+        if (row == 0 && column == columns - 1) {
+            bombs = 0;
+            if (this.board[0][column - 1].getType().equals("BOMB")) bombs++;
+            if (this.board[1][column].getType().equals("BOMB")) bombs++;
+            if (this.board[1][column - 1].getType().equals("BOMB")) bombs++;
+        }
+
+        if (row == rows - 1 && column == 0) {
+            bombs = 0;
+            if (this.board[row - 1][0].getType().equals("BOMB")) bombs++;
+            if (this.board[row][1].getType().equals("BOMB")) bombs++;
+            if (this.board[row - 1][1].getType().equals("BOMB")) bombs++;
+        }
+
+        return bombs;
+    }
+
     public boolean boardHasType(String type) {
         for (int i = 0; i < this.rows; i++) {
             for (int j = 0; j < this.columns; j++) {
