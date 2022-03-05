@@ -308,10 +308,26 @@ public class Board {
             for (int j = 0; j < this.columns; j++) {
                 if (distance(row, column, i ,j) < 2 && Objects.equals(this.board[i][j].getType(), "EMPTY")) {
                     this.board[i][j].setHidden(false);
-                    //revealEmpty(i,j);
+                    printBoard();
+                    if (emptyNeighbours(i,j) > 0) {
+                        revealEmpty(i,j);
+                    }
                 }
              }
         }
+    }
+
+    public int emptyNeighbours(int row, int column) {
+        int neighbours = 0;
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.columns; j++) {
+                if (distance(row, column, i, j) < 2 && distance(row, column, i, j) > 0) {
+                    if (this.board[i][j].getType().equals("EMPTY") && this.board[i][j].isHidden()) neighbours++;
+                }
+            }
+        }
+        System.out.println(neighbours);
+        return neighbours;
     }
 
     private double distance(int x1, int y1, int x2, int y2) {
