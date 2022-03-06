@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Menu {
 
     public static final String option = Terminal.Colors.ANSI_WHITE + "                                                                                             Choice : " + Terminal.Colors.ANSI_RESET;
@@ -143,7 +145,25 @@ public class Menu {
             " ██████████████████████████████████████████████████████████████████████████████████████████████████████████████████",
             Terminal.Colors.ANSI_RESET,
     };
-    private void clearConsole() {
+    public void clearConsole() {
         System.out.println(System.lineSeparator().repeat(100));
+    }
+
+    public static void showStartMenu() {
+        Arrays.stream(Menu.top).forEach(System.out::println);
+        Arrays.stream(Menu.minesweeper).forEach(System.out::println);
+        Arrays.stream(Menu.bot).forEach(System.out::println);
+    }
+
+    public static void showMainMenu() {
+        Arrays.stream(Menu.top).forEach(System.out::println);
+        Arrays.stream(Menu.minesweeperMenu).forEach(System.out::println);
+        Arrays.stream(Menu.bot).forEach(System.out::println);
+    }
+
+    public static void showOptions() {
+        Arrays.stream(Menu.top).forEach(System.out::println);
+        Arrays.stream(Menu.options).forEach(System.out::println);
+        Arrays.stream(Menu.bot).forEach(System.out::println);
     }
 }

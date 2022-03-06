@@ -4,18 +4,11 @@ import java.util.Arrays;
 public class Minesweeper {
 
     public static void main(String[] args) throws IOException {
+        int rows = 9;
+        int columns = 9;
+        double bombsPercentage = 0.12;
         Board board = new Board(15,14);
-        Arrays.stream(Menu.top).forEach(System.out::println);
-        Arrays.stream(Menu.minesweeper).forEach(System.out::println);
-        Arrays.stream(Menu.bot).forEach(System.out::println);
-
-        Arrays.stream(Menu.top).forEach(System.out::println);
-        Arrays.stream(Menu.minesweeperMenu).forEach(System.out::println);
-        Arrays.stream(Menu.bot).forEach(System.out::println);
-
-        Arrays.stream(Menu.top).forEach(System.out::println);
-        Arrays.stream(Menu.options).forEach(System.out::println);
-        Arrays.stream(Menu.bot).forEach(System.out::println);
+        Menu.showStartMenu();
 
 /*        board.generateBoard();
         board.printBoard();
