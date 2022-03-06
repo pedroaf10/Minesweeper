@@ -1,4 +1,8 @@
+import javax.swing.text.html.parser.Parser;
 import java.util.Arrays;
+import java.util.Scanner;
+
+import static java.lang.Thread.sleep;
 
 public class Menu {
 
@@ -16,7 +20,9 @@ public class Menu {
     public static final String newtransport = Terminal.Colors.ANSI_BLUE + "                                                                                   Which order do you want to get delivered?" + Terminal.Colors.ANSI_RESET;
     public static final String ratetransport = Terminal.Colors.ANSI_BLUE + "                                                                                   Which Carrier do you want to rate?" + Terminal.Colors.ANSI_RESET;
     public static final String orderstotransport= Terminal.Colors.ANSI_BLUE +"                                                                                   Insert order to deliver!" + Terminal.Colors.ANSI_RESET;
-
+    public static final String invalidInput =  Terminal.Colors.ANSI_RED + "                                                ╔════════════════════════╗\n" +
+            "                                                ║     INVALID INPUT      ║ \n" +
+            "                                                ╚════════════════════════╝" + Terminal.Colors.ANSI_RESET;
 
     public static final String[] minesweeper = {
             Terminal.Colors.ANSI_YELLOW,
@@ -43,7 +49,7 @@ public class Menu {
             "                                        "+ Terminal.Colors.ANSI_YELLOW,
             "                                        ",
             "                                                  ╔═══════════════╗                       ",
-            "                                                  ║ PRESS ANY KEY ║             ",
+            "                                                  ║  PRESS ENTER  ║             ",
             "                                                  ╚═══════════════╝                       "+ Terminal.Colors.ANSI_RESET
     };
 
@@ -118,26 +124,6 @@ public class Menu {
     };
 
 
-    public static final String[] menu = {
-            Terminal.Colors.ANSI_CYAN,
-            "                                                                                  ███╗   ███╗███████╗███╗   ██╗██╗   ██╗    ",
-            "                                                                                  ████╗ ████║██╔════╝████╗  ██║██║   ██║    ",
-            "                                                                                  ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║    ",
-            "                                                                                  ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║    ",
-            "                                                                                  ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝    ",
-            "                                                                                  ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝     ",
-            Terminal.Colors.ANSI_RESET,
-    };
-    public static final String[] firstMenuoptions = {
-            "                                                                                 Please choose your type of account!",
-            "                                                                                         1 -> User",
-            "                                                                                         2 -> Volunteer",
-            "                                                                                         3 -> Carrier",
-            "                                                                                         4 -> Shop",
-            "                                                                                         5 -> ADMIN",
-            "                                                                                         0 -> Sair",
-    };
-
     public static final String[] bot = {
             Terminal.Colors.ANSI_CYAN,
             " ╔═╗                                                                                                            ╔═╗",
@@ -145,25 +131,181 @@ public class Menu {
             " ██████████████████████████████████████████████████████████████████████████████████████████████████████████████████",
             Terminal.Colors.ANSI_RESET,
     };
-    public void clearConsole() {
+
+    public static final String[] Explosion1 = {
+            Terminal.Colors.ANSI_RED,
+            "                                :.                        ..                              ",
+            "                                -=.                      :=.                              ",
+            "                                -++-          .        .=++.                              ",
+            "                                :+===.       :-       :====                               ",
+            "                                :+====:     .+=.    .====+-                               ",
+            "                        .:      :+=--=+-.  .===:  .:+=--=+-                               ",
+            "                        .==:.   .+=-:-===: -====..===-:-=+:      .:.                      ",
+            "          .--::.         .===-: .+=-:::-=+=+=:-==+=-:::-=+.   .-==.           ...         ",
+            "            :=+===-:..    :+====-+=-:..:-===-:-===-:..:-=+..-====.      .::-===:          ",
+            "             .:========-::.-==--===-:. .::--:.:--:.. ::==+==--==...:--=======:            ",
+            "               .-==-----====+=-:::--:.   .::. .::.   :-==--:-=+======---===:              ",
+            "                 .-==-:::::-----:..::.    ..  ..    .::::.:-==---::::-===:.               ",
+            "          ...      :===-:.....::::. ..              .....:::::...::-===:.                 ",
+            "          .:-=====---=+==-:.    ...                     ...    .:-===-.                   ",
+            "             .:-===--------::.                               .:-==+=:::::::::::.          ",
+            "                .:-===-::......                            .::--------=====-:.            ",
+            "           ...::--======--::..                            ......::--====-:.               ",
+            "  ..:::--=======----::::......                               ...:::----======--::..       ",
+            " .::--=======---::::....                                          ....:::::--=====+==--:. ",
+            "        ..::--======----:::..                               .....::::----=======---::..   ",
+            "               .:-===--::..                                ..:--=======--::...            ",
+            "           .:-====---------:::.                             ...::-==-:.                   ",
+            "        .:-----------=+==-::.                               .::::::--==-:.                ",
+            "                   .-==--:.   ...                    .....    .:--========-:.             ",
+            "                 .-==--::...::::. ..:.       .        .:--::.....:-===-...:::.            ",
+            "               .:==--:::---=-::.::--:.   .  .::.    ....-====---::::-===:                 ",
+            "             .:===--=====+==::--===::   .:. .--:.   .::::-==:-=====----=+=.               ",
+            "           .:======--:..-==--==-===:: .::::.:==-::. .:---:-=:  ..:--======+-.             ",
+            "          :==--:..    .-====-.  ==-:..:-=-::-====-:..:-===-=+.       ..:-==++-.           ",
+            "         ..          .=+=:.    .+=-:::-===:-=- :==-:::-=+=====.            .::-.          ",
+            "                    .::.       :+=-:-===+=-==.  .===-:-=+:.:=+-                           ",
+            "                               :+=--==: -===.    .-+=--=+:   .-.                          ",
+            "                               -+====.  .++:       .====+-                                ",
+            "                               ====:     --         .-==+-                                ",
+            "                               =+-.      ..           :=+-                                ",
+            "                              .=:                      .-=                                ",
+            "                              ..                         :                                "+ Terminal.Colors.ANSI_RESET
+    };
+
+    public static final String[] Explosion2 = {
+            Terminal.Colors.ANSI_YELLOW,
+            "                                :.                        ..                              ",
+            "                                -=.                      :=.                              ",
+            "                                -++-          .        .=++.                              ",
+            "                                :+===.       :-       :====                               ",
+            "                                :+====:     .+=.    .====+-                               ",
+            "                        .:      :+=--=+-.  .===:  .:+=--=+-                               ",
+            "                        .==:.   .+=-:-===: -====..===-:-=+:      .:.                      ",
+            "          .--::.         .===-: .+=-:::-=+=+=:-==+=-:::-=+.   .-==.           ...         ",
+            "            :=+===-:..    :+====-+=-:..:-===-:-===-:..:-=+..-====.      .::-===:          ",
+            "             .:========-::.-==--===-:. .::--:.:--:.. ::==+==--==...:--=======:            ",
+            "               .-==-----====+=-:::--:.   .::. .::.   :-==--:-=+======---===:              ",
+            "                 .-==-:::::-----:..::.    ..  ..    .::::.:-==---::::-===:.               ",
+            "          ...      :===-:.....::::. ..              .....:::::...::-===:.                 ",
+            "          .:-=====---=+==-:.    ...                     ...    .:-===-.                   ",
+            "             .:-===--------::.                               .:-==+=:::::::::::.          ",
+            "                .:-===-::......                            .::--------=====-:.            ",
+            "           ...::--======--::..                            ......::--====-:.               ",
+            "  ..:::--=======----::::......                               ...:::----======--::..       ",
+            " .::--=======---::::....                                          ....:::::--=====+==--:. ",
+            "        ..::--======----:::..                               .....::::----=======---::..   ",
+            "               .:-===--::..                                ..:--=======--::...            ",
+            "           .:-====---------:::.                             ...::-==-:.                   ",
+            "        .:-----------=+==-::.                               .::::::--==-:.                ",
+            "                   .-==--:.   ...                    .....    .:--========-:.             ",
+            "                 .-==--::...::::. ..:.       .        .:--::.....:-===-...:::.            ",
+            "               .:==--:::---=-::.::--:.   .  .::.    ....-====---::::-===:                 ",
+            "             .:===--=====+==::--===::   .:. .--:.   .::::-==:-=====----=+=.               ",
+            "           .:======--:..-==--==-===:: .::::.:==-::. .:---:-=:  ..:--======+-.             ",
+            "          :==--:..    .-====-.  ==-:..:-=-::-====-:..:-===-=+.       ..:-==++-.           ",
+            "         ..          .=+=:.    .+=-:::-===:-=- :==-:::-=+=====.            .::-.          ",
+            "                    .::.       :+=-:-===+=-==.  .===-:-=+:.:=+-                           ",
+            "                               :+=--==: -===.    .-+=--=+:   .-.                          ",
+            "                               -+====.  .++:       .====+-                                ",
+            "                               ====:     --         .-==+-                                ",
+            "                               =+-.      ..           :=+-                                ",
+            "                              .=:                      .-=                                ",
+            "                              ..                         :                                "+ Terminal.Colors.ANSI_RESET
+    };
+
+    public static void clearConsole() {
         System.out.println(System.lineSeparator().repeat(100));
     }
+
 
     public static void showStartMenu() {
         Arrays.stream(Menu.top).forEach(System.out::println);
         Arrays.stream(Menu.minesweeper).forEach(System.out::println);
         Arrays.stream(Menu.bot).forEach(System.out::println);
+        Scanner in = new Scanner(System.in);
+        in.nextLine();
+        clearConsole();
     }
 
-    public static void showMainMenu() {
-        Arrays.stream(Menu.top).forEach(System.out::println);
-        Arrays.stream(Menu.minesweeperMenu).forEach(System.out::println);
-        Arrays.stream(Menu.bot).forEach(System.out::println);
+
+    public static int showMainMenu() throws InterruptedException {
+        boolean valid = false;
+        Scanner in = new Scanner(System.in);
+        Integer option = 0;
+        clearConsole();
+
+        do {
+            Arrays.stream(Menu.top).forEach(System.out::println);
+            Arrays.stream(Menu.minesweeperMenu).forEach(System.out::println);
+            Arrays.stream(Menu.bot).forEach(System.out::println);
+            String test = in.nextLine();
+
+            if (!isInteger(test) || Integer.parseInt(test) > 3 ) {
+                invalidInput();
+
+            } else {
+                valid = true;
+                option = Integer.parseInt(test);
+            }
+        } while (!valid);
+
+        return option;
     }
 
-    public static void showOptions() {
+    public static void showOptions() throws InterruptedException {
+        clearConsole();
         Arrays.stream(Menu.top).forEach(System.out::println);
         Arrays.stream(Menu.options).forEach(System.out::println);
         Arrays.stream(Menu.bot).forEach(System.out::println);
+
+        do {
+            showExplosion();
+        } while (1 != 0);
+
+    }
+
+    public static void showExplosion() throws InterruptedException {
+        clearConsole();
+        Arrays.stream(Menu.top).forEach(System.out::println);
+        Arrays.stream(Menu.Explosion2).forEach(System.out::println);
+        Arrays.stream(Menu.bot).forEach(System.out::println);
+        sleep(500);
+        clearConsole();
+        Arrays.stream(Menu.top).forEach(System.out::println);
+        Arrays.stream(Menu.Explosion1).forEach(System.out::println);
+        Arrays.stream(Menu.bot).forEach(System.out::println);
+        sleep(500);
+        clearConsole();
+        Arrays.stream(Menu.top).forEach(System.out::println);
+        Arrays.stream(Menu.Explosion2).forEach(System.out::println);
+        Arrays.stream(Menu.bot).forEach(System.out::println);
+        sleep(500);
+        clearConsole();
+        Arrays.stream(Menu.top).forEach(System.out::println);
+        Arrays.stream(Menu.Explosion1).forEach(System.out::println);
+        Arrays.stream(Menu.bot).forEach(System.out::println);
+        sleep(500);
+
+        do {
+
+        } while (1 != 0);
+
+    }
+
+
+    public static void invalidInput() throws InterruptedException {
+        System.out.println(invalidInput);
+        sleep(1000);
+        clearConsole();
+    }
+
+    public static boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 }
