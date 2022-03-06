@@ -125,7 +125,6 @@ public class Board {
     }
 
     public void showBoard() {
-        //clearConsole();
         printTop();
         for (int i = 0; i < this.rows; i++) {
 
@@ -173,10 +172,6 @@ public class Board {
             case ("EMPTY") -> System.out.print(EMPTY);
             default -> throw new IllegalStateException("Unexpected value: " + board[i][j].getType());
         }
-    }
-
-    private void clearConsole() {
-        System.out.println(System.lineSeparator().repeat(100));
     }
 
     public void generateBombs(double percentage) {
