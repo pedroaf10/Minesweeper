@@ -125,7 +125,6 @@ public class Board {
     }
 
     public void showBoard() {
-        //clearConsole();
         printTop();
         for (int i = 0; i < this.rows; i++) {
 
@@ -138,7 +137,7 @@ public class Board {
 
                 if (board[i][j].isFlag() && Objects.equals(board[i][j].getType(), "BOMB")) System.out.print(FLAGTNT);
                 else {
-                    if(board[i][j].isFlag()){
+                    if (board[i][j].isFlag()) {
                         System.out.print(FLAGEMPTY);
                     } else {
                         printVisibleCell(i, j);
@@ -173,10 +172,6 @@ public class Board {
             case ("EMPTY") -> System.out.print(EMPTY);
             default -> throw new IllegalStateException("Unexpected value: " + board[i][j].getType());
         }
-    }
-
-    private void clearConsole() {
-        System.out.println(System.lineSeparator().repeat(100));
     }
 
     public void generateBombs(double percentage) {
@@ -256,14 +251,14 @@ public class Board {
         return false;
     }
 
-    public boolean boardHasHigherThan3(){
+    public boolean boardHasHigherThan3() {
         for (int i = 0; i < this.rows; i++) {
             for (int j = 0; j < this.columns; j++) {
-                if ( this.board[i][j].getType().equals("FOUR")
-                        ||this.board[i][j].getType().equals("FIVE")
-                        ||this.board[i][j].getType().equals("SIX")
-                        ||this.board[i][j].getType().equals("SEVEN")
-                        ||this.board[i][j].getType().equals("EIGHT")) return true;
+                if (this.board[i][j].getType().equals("FOUR")
+                        || this.board[i][j].getType().equals("FIVE")
+                        || this.board[i][j].getType().equals("SIX")
+                        || this.board[i][j].getType().equals("SEVEN")
+                        || this.board[i][j].getType().equals("EIGHT")) return true;
             }
         }
         return false;
@@ -271,47 +266,58 @@ public class Board {
 
     public void generateBoard() {
         boolean loop = true;
-        while (loop){
+        while (loop) {
             generateBombs(0.12);
             generateNumbers();
             loop = boardHasHigherThan3();
-            if(loop) {
+            if (loop) {
                 clearGeneration();
             }
         }
     }
 
-    public void setFLAG(int row, int column) {
+    public void placeFlag(int row, int column) {
         row--;
         column--;
-        if(this.board[row][column].isFlag()){
-            this.board[row][column].setFlag(false);
-        } else {
-            this.board[row][column].setFlag(true);
-        }
+        this.board[row][column].setFlag(!this.board[row][column].isFlag());
     }
 
-    public boolean playCell(int row, int column){
-        boolean lost = false;
+    public boolean playCell(int row, int column) {
         row--;
         column--;
         this.board[row][column].setHidden(false);
         if (Objects.equals(this.board[row][column].getType(), "BOMB")) return true;
-        if (Objects.equals(this.board[row][column].getType(), "EMPTY")){
-            revealEmpty(row, column);
+        if (Objects.equals(this.board[row][column].getType(), "EMPTY")) {
+            revealAllEmptys();
         }
-        return lost;
+        return false;
     }
 
-    private void revealEmpty(int row, int column) {
+    public void revealAllEmptys() {
+        int exit = 1;
+        while (exit > 0){
+            exit = 0;
+            for (int i = 0; i < this.rows; i++) {
+                for (int j = 0; j < this.columns; j++) {
+                    if(!(this.board[i][j].getType().equals("BOMB")) && this.board[i][j].isHidden() && emptyNeighboursRevealed(i,j)) {
+                        this.board[i][j].setHidden(false);
+                        exit++;
+                    }
+                }
+            }
+        }
+    }
+
+
+    public boolean emptyNeighboursRevealed(int row, int column) {
         for (int i = 0; i < this.rows; i++) {
             for (int j = 0; j < this.columns; j++) {
-                if (distance(row, column, i ,j) < 2 && Objects.equals(this.board[i][j].getType(), "EMPTY")) {
-                    this.board[i][j].setHidden(false);
-                    //revealEmpty(i,j);
+                if (distance(row, column, i, j) == 1 && this.board[i][j].getType().equals("EMPTY") && !(this.board[i][j].isHidden())) {
+                   return true;
                 }
-             }
+            }
         }
+        return false;
     }
 
     private double distance(int x1, int y1, int x2, int y2) {
