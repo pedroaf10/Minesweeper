@@ -254,14 +254,37 @@ public class Menu {
     }
 
     public static void showOptions() throws InterruptedException {
+        boolean valid = false;
+        Scanner in = new Scanner(System.in);
+        Integer option = 0;
         clearConsole();
-        Arrays.stream(Menu.top).forEach(System.out::println);
-        Arrays.stream(Menu.options).forEach(System.out::println);
-        Arrays.stream(Menu.bot).forEach(System.out::println);
 
         do {
-            showExplosion();
-        } while (1 != 0);
+            Arrays.stream(Menu.top).forEach(System.out::println);
+            Arrays.stream(Menu.options).forEach(System.out::println);
+            Arrays.stream(Menu.bot).forEach(System.out::println);
+            String test = in.nextLine();
+
+
+            if (!isInteger(test) || Integer.parseInt(test) > 3 ) {
+                invalidInput();
+
+            } else {
+                option = Integer.parseInt(test);
+
+                switch (option){
+                    case(1):
+                        break;
+                    case(2):
+                        break;
+                    case(3):
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        } while (!valid);
 
     }
 
