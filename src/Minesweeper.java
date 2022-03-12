@@ -15,8 +15,7 @@ public class Minesweeper {
             option = Menu.showMainMenu();
             switch (option) {
                 case (1):
-                    board.generateBoard();
-                    menu.printBoard(board);
+                    board = menu.gameMenu(board);
                     break;
 
                 case (2):
