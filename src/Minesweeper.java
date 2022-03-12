@@ -4,21 +4,24 @@ import java.util.Arrays;
 public class Minesweeper {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        BoardSettings settings = new BoardSettings();
         int option;
         boolean exit = false;
-        Board board = new Board(15,14);
+        Menu menu = new Menu()
+                ;
+        Board board = new Board();
         Menu.showStartMenu();
 
         do {
             option = Menu.showMainMenu();
             switch (option) {
                 case (1):
-                    board.printBoard();
+                    board.generateBoard();
+                    menu.printBoard(board);
                     break;
 
                 case (2):
-                    Menu.showOptions();
+                    board = Menu.showOptions(board);
+
                     break;
 
                 case (3):
