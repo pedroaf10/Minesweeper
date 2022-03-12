@@ -7,9 +7,9 @@ Minesweeper is a single-player puzzle video game. The objective of the game is t
 ![alt text](https://github.com/pedroaf10/Minesweeper/blob/main/game%20images/minesweeper2.png)
 ## Options Menu
 ![alt text](https://github.com/pedroaf10/Minesweeper/blob/main/game%20images/minesweeper3.png)
-## In-Game Initial Board
+## In-Game Initial State
 ![alt text](https://github.com/pedroaf10/Minesweeper/blob/main/game%20images/minesweeper4.png)
-## In-Game Board
+## In-Game State
 ![alt text](https://github.com/pedroaf10/Minesweeper/blob/main/game%20images/minesweeper5.png)
-## Lost Game Menu
+## Fail State
 ![alt text](https://github.com/pedroaf10/Minesweeper/blob/main/game%20images/minesweeper6.png)
