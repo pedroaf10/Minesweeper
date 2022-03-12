@@ -494,6 +494,7 @@ public class Menu {
         Scanner in = new Scanner(System.in);
 
         do {
+            clearConsole();
             printGameMenu(board);
             String test = in.nextLine();
 
@@ -587,6 +588,7 @@ public class Menu {
         if (bomb) {
             finished = false;
             do {
+                clearConsole();
                 printEndGameMenu(board);
                 String test = in.nextLine();
 
